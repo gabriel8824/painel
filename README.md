@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Painel Financeiro · Mercado & Mundo
 
-## Getting Started
+Dashboard "always-on" para monitor de escritório: cotações de câmbio, índices, commodities, criptomoedas, notícias do mundo/finanças, relógio, data e clima — com auto-refresh e visual escuro estilo painel de bolsa.
 
-First, run the development server:
+## Como rodar
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000). Para exibir no monitor, pressione **F11** (tela cheia) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build de produção:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build && npm start
+```
 
-## Learn More
+## O que mostra
 
-To learn more about Next.js, take a look at the following resources:
+- **Destaque:** USD → BRL (Dólar) e USD → AOA (Kwanza), em tamanho grande.
+- **Moedas:** EUR → BRL, GBP → BRL, BRL → AOA.
+- **Criptomoedas:** Bitcoin e Ethereum (variação 24h).
+- **Índices:** Ibovespa, S&P 500, Nasdaq.
+- **Commodities:** Petróleo WTI e Ouro.
+- **Notícias:** ticker rolando + card "Mais importantes"; manchetes de finanças (G1 Economia, InfoMoney) e mundo (G1 Mundo, BBC World — esta traduzida do inglês para o português).
+- **Cabeçalho:** relógio de **Brasília e Luanda**, data e clima de Luanda.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cada cotação mostra seta ▲/▼ e variação percentual no dia. Auto-refresh: câmbio/cripto ~60s, índices/commodities ~2min, notícias ~5min, relógio 1s.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Fontes de dados (gratuitas, sem chave de API)
 
-## Deploy on Vercel
+- **Câmbio / Índices / Commodities:** Yahoo Finance (endpoint público de chart).
+- **Criptomoedas:** Binance (convertido para BRL).
+- **Notícias:** feeds RSS públicos (manchetes em inglês traduzidas via Google Translate).
+- **Clima:** Open-Meteo.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Os dados são buscados nos *route handlers* do servidor (`app/api/*`) para evitar CORS e permitir cache. Se uma fonte ficar indisponível, o painel correspondente degrada graciosamente sem quebrar o resto.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Configuração do clima
+
+A localização padrão é Luanda. Para mudar (ex.: São Paulo), crie um `.env.local` (veja `.env.local.example`):
+
+```env
+WEATHER_LAT=-23.5505
+WEATHER_LON=-46.6333
+WEATHER_CITY=São Paulo
+```
+
+## Deploy
+
+Pronto para deploy na [Vercel](https://vercel.com/new): basta importar o repositório. As variáveis de clima são opcionais.
