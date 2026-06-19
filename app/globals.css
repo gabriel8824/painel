@@ -220,3 +220,77 @@ body {
   width: 0;
   height: 0;
 }
+
+/* Contador "Voltar para o Brasil" — escala a chamatividade conforme 20/08 se aproxima */
+.counter-num {
+  font-size: clamp(1.5rem, 2vw, 1.875rem);
+  color: var(--ink-dim);
+  line-height: 1;
+  transform-origin: right bottom;
+  transition: color 0.6s ease, text-shadow 0.6s ease;
+}
+.counter[data-tier="t45"] .counter-num {
+  color: var(--ink);
+}
+.counter[data-tier="t29"] .counter-num {
+  color: var(--accent);
+  font-size: clamp(1.875rem, 2.4vw, 2.25rem);
+  text-shadow: 0 0 18px rgba(86, 182, 255, 0.25);
+}
+.counter[data-tier="t14"] .counter-num {
+  color: var(--gold);
+  font-size: clamp(2.25rem, 3vw, 3rem);
+  text-shadow: 0 0 22px rgba(245, 196, 81, 0.4);
+}
+.counter[data-tier="t7"] .counter-num {
+  color: var(--gold);
+  font-size: clamp(3rem, 3.6vw, 3.75rem);
+  text-shadow: 0 0 28px rgba(245, 196, 81, 0.55);
+  animation: pulse-warm 3.2s ease-in-out infinite;
+}
+.counter[data-tier="t3"] .counter-num {
+  color: var(--down);
+  font-size: clamp(3.75rem, 4.5vw, 4.5rem);
+  text-shadow: 0 0 32px var(--down-glow);
+  animation: pulse-counter 2.4s ease-in-out infinite;
+}
+.counter[data-tier="t1"] .counter-num {
+  color: var(--down);
+  font-size: clamp(3.75rem, 4.5vw, 4.5rem);
+  text-shadow: 0 0 36px var(--down-glow);
+  animation: pulse-counter 1.8s ease-in-out infinite;
+}
+.counter[data-tier="today"] .counter-num {
+  color: var(--down);
+  font-size: clamp(2.75rem, 4vw, 3.75rem);
+  text-shadow: 0 0 44px var(--down-glow);
+  animation: pulse-counter 1.6s ease-in-out infinite;
+}
+.counter[data-tier="arrived"] .counter-num {
+  color: var(--up);
+  font-size: clamp(1.875rem, 2.4vw, 2.25rem);
+  text-shadow: 0 0 24px var(--up-glow);
+}
+@keyframes pulse-warm {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+@keyframes pulse-counter {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .counter-num {
+    animation: none !important;
+  }
+}

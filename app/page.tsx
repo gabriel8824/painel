@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="relative z-10 mx-auto flex h-screen max-w-[1920px] flex-col gap-4 p-5 xl:gap-5 xl:p-7">
       {/* Cabeçalho */}
-      <header className="flex items-end justify-between gap-4 rise">
+      <header className="flex items-center justify-between gap-4 rise">
         <div>
           <div className="flex items-center gap-2.5">
             <span className="live-dot inline-block h-2.5 w-2.5 rounded-full bg-[var(--up)]" />
@@ -22,7 +22,7 @@ export default function Home() {
           <WeatherCard />
           <span
             aria-hidden
-            className="hidden h-12 w-px self-center bg-[var(--panel-edge)] sm:block"
+            className="hidden h-20 w-px self-center bg-[var(--panel-edge)] sm:block xl:h-24"
           />
           <Clocks />
         </div>
