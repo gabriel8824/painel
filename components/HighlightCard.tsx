@@ -5,13 +5,15 @@ import { Trend } from "./Trend";
 export function HighlightCard({ q, delay = 0 }: { q: Quote; delay?: number }) {
   const t = trendOf(q.pct);
   const glow = t === "up" ? "glow-up" : t === "down" ? "glow-down" : "";
+  // valores grandes (ex. Kwanza) sem decimais para caber no card
+  const big = q.value >= 100;
   const value = q.currency
-    ? formatCurrency(q.value, q.currency)
-    : formatNumber(q.value);
+    ? formatCurrency(q.value, q.currency, big ? { maximumFractionDigits: 0 } : {})
+    : formatNumber(q.value, big ? 0 : 2);
 
   return (
     <div
-      className="panel rise flex flex-col justify-between p-6 xl:p-7"
+      className="panel rise flex h-full flex-col justify-between p-6 xl:p-7"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div
@@ -26,7 +28,7 @@ export function HighlightCard({ q, delay = 0 }: { q: Quote; delay?: number }) {
       </div>
       <div className="mt-4">
         <div
-          className={`font-mono text-5xl font-bold leading-none tracking-tight xl:text-6xl 2xl:text-7xl ${glow}`}
+          className={`font-mono text-4xl font-bold leading-none tracking-tight sm:text-5xl 2xl:text-7xl ${glow}`}
         >
           {value}
         </div>

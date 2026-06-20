@@ -43,7 +43,7 @@ export function QuotePanel({
               </div>
             ))
           : quotes.map((q) => (
-              <div key={q.id} className="flex items-center justify-between gap-3 py-3">
+              <div key={q.id} className="flex items-center justify-between gap-3 py-2.5">
                 <div className="flex items-center gap-2.5 min-w-0">
                   <span className="text-lg">{q.symbol}</span>
                   <div className="min-w-0">

@@ -22,7 +22,7 @@ export default function Home() {
           <WeatherCard />
           <span
             aria-hidden
-            className="hidden h-20 w-px self-center bg-[var(--panel-edge)] sm:block xl:h-24"
+            className="hidden h-14 w-px self-center bg-[var(--panel-edge)] sm:block xl:h-16"
           />
           <Clocks />
         </div>

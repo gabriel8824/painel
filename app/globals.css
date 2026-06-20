@@ -289,8 +289,49 @@ body {
     transform: scale(1.05);
   }
 }
+/* Moldura do card "Voltar ao Brasil" — intensifica junto com o número por nível.
+   Anima só box-shadow/border (nunca transform) para não reflowar as colunas do hero. */
+.return-card {
+  transition: border-color 0.6s ease, box-shadow 0.6s ease;
+}
+.return-card[data-tier="t14"],
+.return-card[data-tier="t7"] {
+  border-color: rgba(245, 196, 81, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(245, 196, 81, 0.22),
+    0 28px 70px -30px rgba(245, 196, 81, 0.3);
+}
+.return-card[data-tier="t3"],
+.return-card[data-tier="t1"],
+.return-card[data-tier="today"] {
+  border-color: var(--down);
+  box-shadow:
+    0 0 0 1px var(--down-glow),
+    0 0 50px -8px var(--down-glow);
+  animation: pulse-frame 3.2s ease-in-out infinite;
+}
+.return-card[data-tier="arrived"] {
+  border-color: var(--up);
+  box-shadow:
+    0 0 0 1px var(--up-glow),
+    0 0 50px -10px var(--up-glow);
+}
+@keyframes pulse-frame {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px var(--down-glow),
+      0 0 38px -12px var(--down-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px var(--down),
+      0 0 64px -4px var(--down-glow);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .counter-num {
+  .counter-num,
+  .return-card {
     animation: none !important;
   }
 }

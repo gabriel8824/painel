@@ -2,6 +2,7 @@
 
 import { useAutoRefresh } from "./useAutoRefresh";
 import { HighlightCard } from "./HighlightCard";
+import { ReturnCard } from "./ReturnCard";
 import { QuotePanel } from "./QuotePanel";
 import type { Quote } from "@/lib/types";
 
@@ -25,8 +26,8 @@ export function Dashboard() {
 
   return (
     <div className="flex h-full flex-col gap-4 xl:gap-5">
-      {/* Destaque: Dólar e Kwanza */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:gap-5">
+      {/* Destaque: Dólar, Kwanza e contagem para voltar ao Brasil */}
+      <div className="grid grid-cols-1 auto-rows-[9rem] gap-4 sm:grid-cols-2 xl:grid-cols-3 xl:auto-rows-[10rem] xl:gap-5 2xl:auto-rows-[12rem]">
         {hero.length > 0
           ? hero.map((q, i) => (
               <HighlightCard key={q.id} q={q} delay={i * 90} />
@@ -34,14 +35,15 @@ export function Dashboard() {
           : Array.from({ length: 2 }).map((_, i) => (
               <div
                 key={i}
-                className="panel h-40 animate-pulse rise"
+                className="panel h-full animate-pulse rise"
                 style={{ animationDelay: `${i * 90}ms` }}
               />
             ))}
+        <ReturnCard />
       </div>
 
       {/* Grade de painéis */}
-      <div className="grid flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)] gap-4 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-[minmax(0,1fr)] xl:gap-5">
+      <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(0,1fr)] gap-4 md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-[minmax(0,1fr)] xl:gap-5">
         <QuotePanel
           title="Moedas"
           icon="💱"
